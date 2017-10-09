@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    canvas{
+        border: 1px solid red;
+    }
+</style>
+<body>
+<canvas width="600px" height="600px"></canvas>
+<script>
+
+    //圆心坐标（300，300）
+    //半径 200
+let canvas=document.querySelector('canvas');
+let ctx=canvas.getContext('2d');
+polyJ(200,5);
+    poly(8);
+ function poly( n ) {
+     ctx.beginPath();           //开始路径
+     ctx.moveTo(500,300);         //确定开始位置
+     let rad =   Math.PI* 2/ n;   //确定每个顶点(每一份)的角度
+     for (let i = 0; i < n; i++) {
+         let x = 300 + 200 * Math.cos(rad * i),      //x=圆心坐标+半径*cos
+             y = 300 + 200 * Math.sin(rad * i);     //y=圆心坐标+半径*sin
+         ctx.lineTo(x, y);    //画每条线;
+     }
+     ctx.closePath();       //闭合路径;
+     ctx.stroke();          //描边
+ }
+
+ //多角形
+    function polyJ(r,n) {
+     ctx.beginPath();      //开始一条路径
+     ctx.moveTo(300+r,300);   //确定开始点的位置
+     let rad=2*Math.PI/(2*n);
+     for(let i=0;i<2*n;i++){
+         let r1=i%2?r/2:r;
+       let x=300+r1*Math.cos(rad*i);
+       let y=300+r1*Math.sin(rad*i);
+       ctx.lineTo(x,y);
+     }
+     ctx.closePath(); // 闭合路径
+     ctx.stroke();
+    }
+</script>
+</body>
+</html>

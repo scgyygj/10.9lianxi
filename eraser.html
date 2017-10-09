@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>橡皮擦</title>
+</head>
+<style>
+    .box{
+        width: 600px;
+        height: 600px;
+        position: relative;
+    }
+    canvas{
+        border: 1px solid red;
+    }
+    .eraser{
+        width: 50px;
+        height: 50px;
+        background: yellow;
+        position: absolute;
+        top:0;
+        left: 0;
+        opacity: 0;
+    }
+    .opacity{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+</style>
+<body>
+<div class="box">
+    <canvas width="600px" height="600px"></canvas>
+    <div class="eraser"></div>
+    <div class="opacity"></div>
+</div>
+<script>
+    let canvas=document.querySelector('canvas');
+    let ctx=canvas.getContext('2d');
+    let box=document.querySelector('.box');
+    let eraser=document.querySelector('.eraser');
+    let opacity=document.querySelector('.opacity');
+    polyJ(200,5);
+    function polyJ(r,n) {
+        ctx.beginPath();      //开始一条路径
+        ctx.moveTo(300+r,300);   //确定开始点的位置
+        let rad=2*Math.PI/(2*n);
+        for(let i=0;i<2*n;i++){
+            let r1=i%2?r/2:r;
+            let x=300+r1*Math.cos(rad*i);
+            let y=300+r1*Math.sin(rad*i);
+            ctx.lineTo(x,y);
+        }
+        ctx.closePath(); // 闭合路径
+        ctx.stroke();
+    }
+opacity.onmousedown=function () {
+        eraser.style.opacity='1';
+    opacity.onmousemove=function (e) {
+        let ox=e.offsetX-25;
+        let oy=e.offsetY-25;
+        eraser.style.left=`${ox}px`;
+        eraser.style.top=`${oy}px`;
+        ctx.clearRect(ox,oy,50,50);
+    }
+    opacity.onmouseup=function () {
+       eraser.style.opacity='0';
+       opacity.onmousemove=null;
+    }
+}
+</script>
+</body>
+</html>

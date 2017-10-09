@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    canvas{
+        border: 1px solid red;
+    }
+</style>
+<body>
+<canvas width="600" height="600"></canvas>
+<script>
+    let canvas=document.querySelector('canvas');
+    let ctx=canvas.getContext('2d');
+
+    //画线
+//    canvas.onmousedown=function (e) {     //鼠标按下触发的事件确定开始位置
+//        let cx=e.offsetX,cy=e.offsetY;  //鼠标按下的位置
+//        canvas.onmousemove=function (e) {     //鼠标移动画线
+//             let ox=e.offsetX,oy=e.offsetY;    //鼠标移动的坐标
+//            ctx.clearRect(0,0,canvas.width,canvas.height);   //每次开始时清空画板
+//            ctx.beginPath();   //开始路径
+//            ctx.moveTo(cx,cy);   //开始坐标
+//            ctx.lineTo(ox,oy);    //移动坐标
+//            ctx.stroke();      //描边
+//        }
+//        canvas.onmouseup=function () {
+//            canvas.onmousemove=null;
+//        }
+//    }
+    //画圆
+//    canvas.onmousedown=function (e) {
+//        let cx=e.offsetX,cy=e.offsetY;
+//        canvas.onmousemove=function (e) {
+//            let ox=e.offsetX,oy=e.offsetY;    //鼠标移动的坐标
+//            let r=Math.sqrt((Math.pow(ox-cx,2)+Math.pow(oy-cy,2)),2);
+//            ctx.clearRect(0,0,canvas.width,canvas.height);
+//            ctx.beginPath();
+//            ctx.arc(cx,cy,r,0,Math.PI*2);
+//            ctx.stroke();
+//        }
+//        canvas.onmouseup=function () {
+//            canvas.onmousemove=null;
+//        }
+//    }
+    //铅笔随便画一
+//    canvas.onmousedown=function (e) {
+//        let cx=e.offsetX,cy=e.offsetY;
+//        canvas.onmousemove=function (e) {
+//            let ox=e.offsetX,oy=e.offsetY;
+//            ctx.beginPath();      //开始一条路径
+//            ctx.moveTo(cx,cy);        //开始点的坐标
+//            ctx.lineTo(ox,oy);    //移动坐标
+//            ctx.stroke();      //描边
+//            cx=ox;
+//            cy=oy;
+//        }
+//        canvas.onmouseup=function () {
+//            canvas.onmousemove=null;
+//        }
+//    }
+
+    //铅笔随便画二
+//    canvas.onmousedown=function (e) {
+//        let cx=e.offsetX,cy=e.offsetY;
+//        ctx.beginPath();      //开始一条路径
+//        ctx.moveTo(cx,cy);        //开始点的坐标
+//        canvas.onmousemove=function (e) {
+//            let ox=e.offsetX,oy=e.offsetY;
+//            ctx.lineTo(ox,oy);    //移动坐标
+//            ctx.stroke();      //描边
+//        }
+//        canvas.onmouseup=function () {
+//            canvas.onmousemove=null;
+//        }
+//    }
+    //画多边形
+    
+</script>
+</body>
+</html>

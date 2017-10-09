@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        width: 600px;
+        height: 600px;
+        position: relative;
+    }
+    canvas{
+        border: 1px solid red;
+    }
+    .eraser{
+        width: 50px;
+        height: 50px;
+        background: yellow;
+    }
+    .opacity
+</style>
+<body>
+<div class="box">
+    <canvas width="600px" height="600px"></canvas>
+    <div class="eraser"></div>
+    <div class="opacity"></div>
+</div>
+
+<button>撤销</button>
+<button>橡皮擦</button>
+<script>
+    let canvas=document.querySelector('canvas');
+    let ctx=canvas.getContext('2d');
+    let button=document.querySelectorAll('button');
+    let arr=[];
+    canvas.onmousedown=function (e) {     //鼠标按下触发的事件确定开始位置
+        let cx=e.offsetX,cy=e.offsetY;  //鼠标按下的位置
+        canvas.onmousemove=function (e) {     //鼠标移动画线
+            let ox=e.offsetX,oy=e.offsetY;    //鼠标移动的坐标
+            ctx.clearRect(0,0,canvas.width,canvas.height);   //每次开始时清空画板
+            if(arr.length){
+                ctx.putImageData(arr[arr.length-1],0,0);             //把上一次画的放入到画板中
+            }
+            ctx.beginPath();   //开始路径
+            ctx.moveTo(cx,cy);   //开始坐标
+            ctx.lineTo(ox,oy);    //移动坐标
+            ctx.stroke();      //描边
+
+        }
+        canvas.onmouseup=function () {
+            arr.push(ctx.getImageData(0,0,canvas.width,canvas.height));    //保存上一次画的历史记录
+            canvas.onmousemove=null;
+        }
+    }
+    //撤销
+    button[0].onclick=function () {
+        if(!arr.length){return;}
+        arr.pop();
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.putImageData(arr[arr.length-1],0,0);
+    }
+    //橡皮擦
+    let body=document.querySelector('body');
+    button[1].onclick=function () {
+        let divs=document.createElement('div');
+        divs.classList.add('divs');
+        body.appendChild(divs);
+        divs.onmousemove=function (e) {
+            canvas.onmousedown=null;
+            canvas.onmousemove=null;
+            let ox=e.offsetX,oy=e.offsetY;
+            ctx.clearRect(ox,oy,divs.width,divs.height);
+        }
+    }
+</script>
+</body>
+</html>
